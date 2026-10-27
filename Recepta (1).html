@@ -1,0 +1,788 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Recepta</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Recepta is an AI-native pharmaceutical venture building AI-driven drug discovery, precision drug delivery and computational chemistry tools for R&D teams.">
+<meta name="theme-color" content="#0A1F3C">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Recepta | AI-Native Drug Discovery">
+<meta property="og:description" content="AI-driven drug discovery, precision drug delivery and computational chemistry tools for pharmaceutical companies, biotech firms and research institutions.">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Recepta","description":"AI-native pharmaceutical venture focused on precision drug delivery, AI-driven drug discovery and computational chemistry tools."}
+</script>
+<style>
+/*
+  Layout concept: a navy instrument-panel hero with a molecular scaffold on a measurement grid,
+  light sections ruled by hairlines (cards only for the three solutions), and a navy
+  convergence band where AI, pharma and computation overlap.
+*/
+:root{
+  --bg:#F4F8FA;
+  --bg-alt:#E8F0F5;
+  --surface:#FFFFFF;
+  --ink:#0A1F3C;
+  --ink-soft:#44566D;
+  --line:#D2DDE6;
+  --accent:#1FC2BD;
+  --accent-ink:#0B7A7F;
+  --on-accent:#06182E;
+  --focus:#0B7A7F;
+  --danger:#B42318;
+  --shadow:0 1px 2px rgba(10,31,60,.06),0 10px 28px rgba(10,31,60,.06);
+  --hero-bg:#0A1F3C;
+  --hero-fg:#F2F7FB;
+  --hero-soft:#A9BDD1;
+  --hero-line:rgba(255,255,255,.14);
+  --accent-hi:#4FD8D3;
+  --radius:14px;
+  --font-display:'Instrument Serif','Iowan Old Style',Georgia,serif;
+  --font-body:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#071426;--bg-alt:#0A1B32;--surface:#0E2340;--ink:#E8F0F7;--ink-soft:#9DB1C6;--line:#1D3656;
+    --accent-ink:#4FD8D3;--focus:#4FD8D3;--danger:#FF9C93;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.3);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#071426;--bg-alt:#0A1B32;--surface:#0E2340;--ink:#E8F0F7;--ink-soft:#9DB1C6;--line:#1D3656;
+  --accent-ink:#4FD8D3;--focus:#4FD8D3;--danger:#FF9C93;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.3);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--font-body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hero-bg);z-index:30}
+main{display:block}
+h1,h2,h3,p,ul,ol,dl,dd,figure{margin:0}
+h1,h2,h3{font-weight:400;text-wrap:balance}
+h1,h2{font-family:var(--font-display);letter-spacing:-.012em;line-height:1.04}
+h1{font-size:clamp(2.7rem,6.2vw,4.9rem)}
+h2{font-size:clamp(2.1rem,4.2vw,3.2rem)}
+h3{font:600 1.15rem/1.3 var(--font-body)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
+.on-dark{--focus:var(--accent-hi);background:var(--hero-bg);color:var(--hero-fg)}
+
+.wrap{width:100%;max-width:1200px;margin-inline:auto;padding-left:max(clamp(16px,4vw,32px),env(safe-area-inset-left,0px));padding-right:max(clamp(16px,4vw,32px),env(safe-area-inset-right,0px))}
+.section{padding-block:clamp(64px,9vw,112px)}
+.section[id]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 72px)}
+.bg-base{background:var(--bg)}
+.bg-alt{background:var(--bg-alt)}
+.bg-surface{background:var(--surface)}
+.section-head{display:grid;gap:16px;max-width:720px;margin-bottom:clamp(32px,5vw,56px)}
+.lede{font-size:clamp(1.05rem,1.4vw,1.2rem);color:var(--ink-soft);max-width:58ch}
+.on-dark .lede{color:var(--hero-soft)}
+.eyebrow{font:500 .75rem/1.2 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}
+.on-dark .eyebrow{color:var(--accent-hi)}
+.fine{font-size:.9rem;color:var(--ink-soft)}
+.skip{position:absolute;left:-9999px;top:0}
+.skip:focus{left:16px;top:16px;z-index:60;background:#fff;color:#06182E;padding:10px 14px;border-radius:8px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 1.5rem;border:1px solid transparent;border-radius:10px;font:600 1rem/1 var(--font-body);text-decoration:none;cursor:pointer;transition:background-color .2s,border-color .2s,transform .2s}
+.btn-primary{background:var(--accent);color:var(--on-accent)}
+.btn-primary:hover{background:#3BD6D1}
+.btn-ghost{background:transparent;color:var(--hero-fg);border-color:var(--hero-line)}
+.btn-ghost:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.3)}
+.btn-quiet{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-quiet:hover{border-color:var(--accent-ink)}
+.btn-sm{min-height:44px;padding:0 1.1rem;font-size:.95rem}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+
+/* Header */
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;border-bottom:1px solid var(--hero-line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
+.brand{display:inline-flex;align-items:center;gap:10px;color:var(--hero-fg);text-decoration:none;font:400 1.7rem/1 var(--font-display);letter-spacing:-.01em}
+.mark{display:block;flex:none}
+.mark .m-hex,.mark .m-bond{fill:none;stroke:var(--accent-hi);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.mark .m-core{fill:var(--accent-hi)}
+.nav{display:flex;align-items:center;gap:28px}
+.nav a{color:var(--hero-soft);text-decoration:none;font-size:.95rem;font-weight:500;padding:8px 0}
+.nav a:hover{color:var(--hero-fg)}
+.header-actions{display:flex;align-items:center;gap:10px}
+.menu-btn{display:none;align-items:center;gap:10px;min-height:44px;padding:0 14px;background:transparent;color:var(--hero-fg);border:1px solid var(--hero-line);border-radius:10px;font:500 .9rem/1 var(--font-body);cursor:pointer}
+.menu-btn .bars{display:block;width:16px;height:2px;background:currentColor;box-shadow:0 -5px 0 currentColor,0 5px 0 currentColor}
+@media (max-width:880px){
+  .menu-btn{display:inline-flex}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;background:var(--hero-bg);border-bottom:1px solid var(--hero-line);padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
+  .site-header.nav-open .nav{display:flex}
+  .nav a{padding:14px 0;border-top:1px solid var(--hero-line);font-size:1.05rem}
+  .nav a:first-child{border-top:0}
+}
+
+/* Hero */
+.hero{padding-block:clamp(48px,7vw,96px);background:radial-gradient(900px 520px at 88% 18%,rgba(31,194,189,.17),transparent 62%),var(--hero-bg)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,6vw,80px);align-items:center}
+.hero-copy{display:grid;gap:24px;justify-items:start}
+.hero-copy .lede{max-width:50ch}
+.audience{margin-top:12px;padding-top:20px;border-top:1px solid var(--hero-line);font:500 .78rem/1.7 var(--font-mono);letter-spacing:.04em;color:var(--hero-soft);max-width:52ch}
+.panel{border:1px solid var(--hero-line);border-radius:var(--radius);background-color:rgba(255,255,255,.025);background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:28px 28px;overflow:hidden}
+.panel-head{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--hero-line);background:rgba(10,31,60,.7);font:500 .7rem/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--hero-soft)}
+.panel svg{display:block;width:100%;height:auto}
+.panel figcaption{padding:12px 16px;border-top:1px solid var(--hero-line);background:rgba(10,31,60,.7);font:400 .75rem/1.4 var(--font-mono);color:var(--hero-soft)}
+.mol-ring{fill:none;stroke:var(--hero-line);stroke-width:1;stroke-dasharray:2 6}
+.mol-ring.faint{stroke-dasharray:none;opacity:.7}
+.mol-orbit{fill:none;stroke:var(--accent-hi);stroke-opacity:.35;stroke-width:1;stroke-dasharray:60 18 6 18}
+.mol-dot,.mol-hit{fill:var(--accent-hi)}
+.contacts path{fill:none;stroke:var(--accent-hi);stroke-width:1.4;stroke-dasharray:3 4;stroke-opacity:.85}
+.bonds polygon,.bonds path{fill:none;stroke:var(--hero-fg);stroke-opacity:.92;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.bonds polygon.tint{fill:rgba(79,216,211,.08)}
+.atom circle{fill:var(--hero-bg);stroke:var(--accent-hi);stroke-width:1.5}
+.atom text{fill:var(--accent-hi);font:500 12px var(--font-mono);text-anchor:middle}
+.end-dot{fill:var(--hero-fg)}
+
+/* Solutions */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.card{display:flex;flex-direction:column;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .25s,border-color .25s}
+.card-art{background:var(--bg-alt);border-bottom:1px solid var(--line);padding:14px 16px;color:var(--accent-ink)}
+.card-art svg{display:block;width:100%;height:auto}
+.card-body{display:flex;flex-direction:column;gap:14px;flex:1;min-width:0;padding:24px}
+.card-body p{color:var(--ink-soft)}
+.card-body ul{list-style:none;padding:0;display:grid;gap:8px;font-size:.95rem}
+.card-body li{display:flex;gap:10px;color:var(--ink)}
+.card-body li::before{content:"";flex:none;width:6px;height:6px;margin-top:.62em;border-radius:50%;background:var(--accent)}
+.text-link{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:6px;color:var(--accent-ink);font-weight:600;text-decoration:none}
+.text-link svg{transition:transform .2s}
+.text-link:hover svg{transform:translateX(4px)}
+@media (hover:hover){.card:hover{transform:translateY(-3px);border-color:var(--accent-ink)}}
+@media (max-width:959px){.cards{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:600px) and (max-width:959px){
+  .card{flex-direction:row}
+  .card-art{flex:0 0 280px;display:flex;align-items:center;border-bottom:0;border-right:1px solid var(--line)}
+}
+.il-dot{fill:var(--ink-soft);fill-opacity:.5}
+.il-hi{fill:var(--accent-ink)}
+.il-line{fill:none;stroke:var(--accent-ink);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.il-muted{fill:none;stroke:var(--ink-soft);stroke-opacity:.6;stroke-width:1.2}
+.il-text{fill:var(--ink-soft);font:500 9px var(--font-mono);letter-spacing:.08em;text-transform:uppercase}
+
+/* Benefits */
+.benefits-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,88px);align-items:start}
+.benefits-intro{display:grid;gap:18px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 100px)}
+.benefit-list{list-style:none;padding:0}
+.benefit{display:grid;grid-template-columns:48px minmax(0,1fr);gap:20px;padding:28px 0;border-top:1px solid var(--line)}
+.benefit:last-child{border-bottom:1px solid var(--line)}
+.benefit .ico{display:grid;place-items:center;width:48px;height:48px;border:1px solid var(--line);border-radius:50%;color:var(--accent-ink)}
+.benefit .ico svg{width:22px;height:22px}
+.benefit h3{margin-bottom:6px}
+.benefit p{color:var(--ink-soft)}
+.ico svg,.node svg,.loop svg{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:899px){
+  .benefits-grid{grid-template-columns:minmax(0,1fr)}
+  .benefits-intro{position:static}
+}
+
+/* How it works */
+.flow{list-style:none;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px}
+.flow li{position:relative;display:grid;gap:10px;align-content:start;min-width:0}
+.node{display:grid;place-items:center;width:56px;height:56px;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--accent-ink);position:relative;z-index:1}
+.node svg{width:24px;height:24px}
+.step-no{font:500 .72rem/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);margin-top:6px}
+.flow p{color:var(--ink-soft);font-size:.97rem}
+.flow li:not(:last-child)::after{content:"";position:absolute;top:27px;left:66px;width:calc(100% - 52px);height:2px;background:repeating-linear-gradient(90deg,var(--accent-ink) 0 6px,transparent 6px 12px);background-size:12px 2px;opacity:.55}
+.loop{display:flex;align-items:center;gap:14px;margin-top:36px;padding:16px 20px;border:1px dashed var(--line);border-radius:12px;background:var(--surface);color:var(--ink-soft)}
+.loop svg{flex:none;width:26px;height:26px;color:var(--accent-ink)}
+.loop strong{color:var(--ink);font-weight:600}
+@media (max-width:959px){
+  .flow{grid-template-columns:minmax(0,1fr);gap:0}
+  .flow li{grid-template-columns:56px minmax(0,1fr);column-gap:20px;row-gap:4px;padding-bottom:32px}
+  .flow li:last-child{padding-bottom:0}
+  .node{grid-row:1 / span 3}
+  .step-no{margin-top:2px}
+  .flow li:not(:last-child)::after{top:64px;bottom:8px;left:27px;width:2px;height:auto;background:repeating-linear-gradient(180deg,var(--accent-ink) 0 6px,transparent 6px 12px);background-size:2px 12px}
+}
+
+/* Why Recepta */
+.why-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(32px,6vw,80px);align-items:center}
+.why-copy{display:grid;gap:18px}
+.pillars{list-style:none;padding:0;margin-top:14px}
+.pillars li{padding:20px 0;border-top:1px solid var(--hero-line)}
+.pillars li:last-child{border-bottom:1px solid var(--hero-line)}
+.pillars h3{margin-bottom:6px;color:var(--hero-fg)}
+.pillars p{color:var(--hero-soft)}
+.venn{display:block;width:100%;max-width:480px;height:auto;margin-inline:auto}
+.v-circle{fill:rgba(79,216,211,.15);stroke:var(--accent-hi);stroke-width:1.5}
+.v-label{fill:var(--hero-soft);font:500 11px var(--font-mono);letter-spacing:.12em}
+.v-lead{fill:none;stroke:var(--hero-soft);stroke-opacity:.6;stroke-width:1}
+.v-end{fill:var(--accent-hi)}
+.v-core{fill:var(--hero-fg);font:400 19px var(--font-display);text-anchor:middle}
+@media (max-width:899px){.why-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(32px,6vw,80px);align-items:start}
+.contact-copy{display:grid;gap:20px}
+.details{display:grid;gap:0;margin-top:10px}
+.details div{display:grid;gap:2px;padding:14px 0;border-top:1px solid var(--line)}
+.details div:last-child{border-bottom:1px solid var(--line)}
+.details dt{font:500 .72rem/1.2 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.details dd{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.ph{padding:2px 8px;border:1px dashed var(--line);border-radius:6px;font:500 .68rem/1.5 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.form-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(20px,3vw,32px);min-width:0}
+.form{display:grid;gap:20px}
+.field{display:grid;gap:8px}
+.field label{font-weight:600;font-size:.95rem}
+.field input,.field textarea{width:100%;min-height:50px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.field textarea{min-height:140px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:var(--ink-soft);opacity:.75}
+.field input:focus-visible,.field textarea:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-color:var(--accent-ink)}
+.field [aria-invalid="true"]{border-color:var(--danger)}
+.err{color:var(--danger);font-size:.9rem}
+.result{display:grid;gap:14px}
+.result:focus{outline:none}
+.req-text{margin:0;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font:400 .85rem/1.6 var(--font-mono);white-space:pre-wrap;overflow-wrap:anywhere}
+@media (max-width:899px){.contact-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* Footer */
+.site-footer{padding-block:48px;border-top:1px solid var(--hero-line)}
+.foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:28px}
+.foot-top p{max-width:42ch;margin-top:14px;color:var(--hero-soft);font-size:.95rem}
+.foot-nav{display:flex;flex-wrap:wrap;gap:8px 24px;align-content:start}
+.foot-nav a{color:var(--hero-soft);text-decoration:none;font-size:.95rem;padding:6px 0}
+.foot-nav a:hover{color:var(--hero-fg)}
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;margin-top:36px;padding-top:20px;border-top:1px solid var(--hero-line);font:400 .78rem/1.6 var(--font-mono);color:var(--hero-soft)}
+
+/* Motion */
+@media (prefers-reduced-motion: no-preference){
+  .rise{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+  .d1{animation-delay:.08s}.d2{animation-delay:.16s}.d3{animation-delay:.24s}.d4{animation-delay:.32s}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .orbit{transform-origin:222px 200px;animation:spin 80s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 3.2s ease-in-out infinite}
+  .pulse.p2{animation-delay:.9s}.pulse.p3{animation-delay:1.8s}
+  @keyframes pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
+  .flow li:not(:last-child)::after{animation:dashx 1.4s linear infinite}
+  @keyframes dashx{to{background-position:12px 0}}
+}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+@media (prefers-reduced-motion: no-preference) and (max-width:959px){
+  .flow li:not(:last-child)::after{animation-name:dashy}
+  @keyframes dashy{to{background-position:0 12px}}
+}
+</style>
+
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="site-header on-dark" id="top">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Recepta, back to top">
+      <svg class="mark" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><polygon class="m-hex" points="16,2.5 28,9.25 28,22.75 16,29.5 4,22.75 4,9.25"/><circle class="m-core" cx="16" cy="16" r="4"/><path class="m-bond" d="M16 12V2.5M19.5 18l8.5 4.75"/></svg>
+      Recepta
+    </a>
+    <nav id="site-nav" class="nav" aria-label="Primary">
+      <a href="#solutions">Solutions</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#why-recepta">Why Recepta</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-primary btn-sm" href="#contact" data-cta>Book a Demo</a>
+      <button id="menu-btn" class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><span class="bars" aria-hidden="true"></span><span class="lbl">Menu</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero on-dark" aria-labelledby="hero-title">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow rise">AI-native pharmaceutical venture</p>
+      <h1 id="hero-title" class="rise d1">Accelerating Drug Discovery with AI.</h1>
+      <p class="lede rise d2">Recepta applies machine learning and computational chemistry to pharmaceutical R&amp;D. We help research teams explore chemical space, design delivery strategies and choose what to test next.</p>
+      <div class="cta-row rise d3">
+        <a class="btn btn-primary" href="#contact" data-cta>Book a Demo</a>
+        <a class="btn btn-ghost" href="#solutions">Explore solutions</a>
+      </div>
+      <p class="audience rise d4">For pharmaceutical companies, biotech firms, R&amp;D leaders and research institutions.</p>
+    </div>
+
+    <figure class="panel rise d2">
+      <div class="panel-head"><span>Scaffold view</span><span>Illustrative</span></div>
+      <svg viewBox="0 0 440 400" role="img" aria-label="Illustration of a fused-ring molecular scaffold inside a binding pocket, with dashed contact lines to its nitrogen atoms.">
+        <circle class="mol-ring" cx="222" cy="200" r="170"/>
+        <circle class="mol-ring faint" cx="222" cy="200" r="110"/>
+        <g class="orbit">
+          <circle class="mol-orbit" cx="222" cy="200" r="140"/>
+          <circle class="mol-dot" cx="353.6" cy="247.9" r="4"/>
+          <circle class="mol-dot" cx="114.8" cy="290" r="4"/>
+          <circle class="mol-dot" cx="197.7" cy="62.1" r="4"/>
+        </g>
+        <g class="contacts">
+          <path d="M257 109 L285 44"/>
+          <path d="M139.6 223 L58 245"/>
+          <path d="M368.8 221.6 L390 225"/>
+        </g>
+        <g class="bonds">
+          <polygon class="tint" points="150,100 184.64,120 184.64,160 150,180 115.36,160 115.36,120"/>
+          <polygon points="219.28,100 253.92,120 253.92,160 219.28,180 184.64,160 184.64,120"/>
+          <polygon points="184.64,160 219.28,180 219.28,220 184.64,240 150,220 150,180"/>
+          <polygon class="tint" points="253.92,160 288.56,180 288.56,220 253.92,240 219.28,220 219.28,180"/>
+          <path d="M288.56 220 L323.2 240 L357.84 220 L357.84 176"/>
+          <path d="M319.4 246 V272 M327 246 V272"/>
+          <path d="M323.2 240 L323.2 244"/>
+          <path d="M115.36 120 L80.72 140"/>
+        </g>
+        <circle class="end-dot" cx="357.84" cy="176" r="3"/>
+        <g class="atom">
+          <circle cx="253.92" cy="120" r="11"/><text x="253.92" y="120" dy=".35em">N</text>
+          <circle cx="150" cy="220" r="11"/><text x="150" y="220" dy=".35em">N</text>
+          <circle cx="357.84" cy="220" r="11"/><text x="357.84" y="220" dy=".35em">N</text>
+          <circle cx="323.2" cy="286" r="11"/><text x="323.2" y="286" dy=".35em">O</text>
+          <circle cx="80.72" cy="140" r="11"/><text x="80.72" y="140" dy=".35em">F</text>
+        </g>
+        <circle class="mol-hit pulse" cx="285" cy="44" r="4"/>
+        <circle class="mol-hit pulse p2" cx="58" cy="245" r="4"/>
+        <circle class="mol-hit pulse p3" cx="390" cy="225" r="4"/>
+      </svg>
+      <figcaption>Conceptual graphic. Not a real compound or study result.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="solutions" class="section bg-base" aria-labelledby="solutions-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="solutions-title">Our Solutions</h2>
+      <p class="lede">Three connected areas of work for pharmaceutical and biotech research teams.</p>
+    </div>
+    <div class="cards">
+
+      <article class="card">
+        <div class="card-art">
+          <svg viewBox="0 0 320 170" role="img" aria-label="Many candidate molecules narrowing to a small shortlist">
+            <g class="il-dot">
+              <circle cx="30" cy="40" r="3"/><circle cx="58" cy="100" r="3"/><circle cx="44" cy="140" r="3"/><circle cx="80" cy="60" r="3"/>
+              <circle cx="96" cy="120" r="3"/><circle cx="120" cy="36" r="3"/><circle cx="140" cy="88" r="3"/><circle cx="110" cy="150" r="3"/>
+              <circle cx="170" cy="50" r="3"/><circle cx="158" cy="124" r="3"/><circle cx="196" cy="150" r="3"/><circle cx="206" cy="30" r="3"/>
+              <circle cx="250" cy="38" r="3"/><circle cx="300" cy="40" r="3"/><circle cx="300" cy="140" r="3"/><circle cx="184" cy="96" r="3"/>
+            </g>
+            <ellipse class="il-muted" cx="248" cy="100" rx="52" ry="46" stroke-dasharray="4 5"/>
+            <path class="il-line" d="M226 70 L270 82 L248 104 L226 70 M248 104 L236 130"/>
+            <g class="il-hi"><circle cx="226" cy="70" r="5"/><circle cx="270" cy="82" r="5"/><circle cx="248" cy="104" r="5"/><circle cx="236" cy="130" r="5"/></g>
+            <text class="il-text" x="24" y="166">Chemical space</text>
+            <text class="il-text" x="248" y="164" text-anchor="middle">Shortlist</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>AI-driven drug discovery</h3>
+          <p>Machine learning models that help teams explore chemical space, rank candidate molecules and decide what to test next in the lab.</p>
+          <ul>
+            <li>Target and hit exploration</li>
+            <li>Property and ADMET prediction</li>
+            <li>Candidate prioritization</li>
+          </ul>
+          <a class="text-link" href="#contact" data-cta data-topic="AI-driven drug discovery">Discuss this area <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-art">
+          <svg viewBox="0 0 320 170" role="img" aria-label="A drug carrier with surface ligands approaching receptors on a target cell">
+            <circle class="il-line" cx="80" cy="85" r="26"/>
+            <circle class="il-muted" cx="80" cy="85" r="16"/>
+            <circle class="il-hi" cx="80" cy="85" r="6"/>
+            <path class="il-line" d="M106 85 H116 M98.4 103.4 L105.5 110.5 M80 111 V121 M61.6 103.4 L54.5 110.5 M54 85 H44 M61.6 66.6 L54.5 59.5 M80 59 V49 M98.4 66.6 L105.5 59.5"/>
+            <g class="il-hi"><circle cx="119" cy="85" r="2.5"/><circle cx="107.6" cy="112.6" r="2.5"/><circle cx="80" cy="124" r="2.5"/><circle cx="52.4" cy="112.6" r="2.5"/><circle cx="41" cy="85" r="2.5"/><circle cx="52.4" cy="57.4" r="2.5"/><circle cx="80" cy="46" r="2.5"/><circle cx="107.6" cy="57.4" r="2.5"/></g>
+            <path class="il-line" d="M130 85 H196 M190 79 L198 85 L190 91" stroke-dasharray="5 5"/>
+            <circle class="il-muted" cx="290" cy="85" r="70"/>
+            <circle class="il-muted" cx="300" cy="85" r="22"/>
+            <path class="il-line" d="M225 59 L215.7 55.3 M225 111 L215.7 114.7 M220 85 L210 85"/>
+            <g class="il-hi"><circle cx="215.7" cy="55.3" r="3"/><circle cx="215.7" cy="114.7" r="3"/><circle cx="208" cy="85" r="3"/></g>
+            <text class="il-text" x="80" y="164" text-anchor="middle">Carrier</text>
+            <text class="il-text" x="226" y="166">Target cell</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Precision drug delivery</h3>
+          <p>Computational design support for getting a therapeutic to the right place in the body, in the right form.</p>
+          <ul>
+            <li>Carrier and formulation design</li>
+            <li>Targeting and release modeling</li>
+            <li>Delivery strategy informed by data</li>
+          </ul>
+          <a class="text-link" href="#contact" data-cta data-topic="Precision drug delivery">Discuss this area <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-art">
+          <svg viewBox="0 0 320 170" role="img" aria-label="A potential energy curve with a marked energy minimum, next to a small three-atom molecule">
+            <path class="il-muted" d="M24 12 V158 H306"/>
+            <path class="il-muted" d="M24 100 H306" stroke-dasharray="3 4"/>
+            <path class="il-line" d="M44 24 C 52 110, 66 146, 100 146 C 150 146, 200 112, 296 100" stroke-width="2.5"/>
+            <path class="il-muted" d="M100 146 V158" stroke-dasharray="2 3"/>
+            <circle class="il-hi pulse" cx="100" cy="146" r="5"/>
+            <path class="il-line" d="M232 44 L262 56 M232 44 L250 28"/>
+            <g class="il-hi"><circle cx="232" cy="44" r="7"/><circle cx="262" cy="56" r="6"/><circle cx="250" cy="28" r="5"/></g>
+            <text class="il-text" x="32" y="22">E</text>
+            <text class="il-text" x="298" y="150">r</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Computational chemistry</h3>
+          <p>Modeling tools for studying how molecules behave and interact, built to fit the way research teams already work.</p>
+          <ul>
+            <li>Docking and molecular dynamics workflows</li>
+            <li>Conformer and property calculations</li>
+            <li>Tools that fit existing pipelines</li>
+          </ul>
+          <a class="text-link" href="#contact" data-cta data-topic="Computational chemistry">Discuss this area <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="benefits" class="section bg-surface" aria-labelledby="benefits-title">
+  <div class="wrap benefits-grid">
+    <div class="benefits-intro">
+      <h2 id="benefits-title">Key Benefits</h2>
+      <p class="lede">What Recepta is designed to give research teams.</p>
+      <p class="fine">Results vary by program, data and target. We scope expectations with you during a demo.</p>
+    </div>
+    <ul class="benefit-list">
+      <li class="benefit">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6l6 6-6 6M13 6l6 6-6 6"/></svg></span>
+        <div><h3>Faster research workflows</h3><p>Automate repeated screening, analysis and reporting steps so scientists spend their time on decisions.</p></div>
+      </li>
+      <li class="benefit">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4-2v-4z"/></svg></span>
+        <div><h3>Improved efficiency</h3><p>Focus lab effort on the candidates most worth testing and cut work that adds little.</p></div>
+      </li>
+      <li class="benefit">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 20v-9M12 20V5M19 20v-7"/></svg></span>
+        <div><h3>Data-driven insights</h3><p>Bring assay data, literature and computed properties together to see patterns that single experiments can hide.</p></div>
+      </li>
+      <li class="benefit">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5"/></svg></span>
+        <div><h3>Optimized resource utilization</h3><p>Plan compute, materials and bench time around priorities so research budgets go further.</p></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="how-it-works" class="section bg-alt" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="how-title">How It Works</h2>
+      <p class="lede">An AI-powered research loop that keeps your scientists in charge of every decision.</p>
+    </div>
+    <ol class="flow">
+      <li>
+        <span class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg></span>
+        <span class="step-no">Step 1</span>
+        <h3>Connect data</h3>
+        <p>Bring in assay results, compound libraries, literature and in-house records.</p>
+      </li>
+      <li>
+        <span class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="5" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="7" r="2"/><circle cx="19" cy="17" r="2"/><path d="M7 7l3.2 3.6M7 17l3.2-3.6M14 11l3.3-3M14 13l3.3 3"/></svg></span>
+        <span class="step-no">Step 2</span>
+        <h3>Model</h3>
+        <p>Apply AI and computational chemistry models to the question at hand.</p>
+      </li>
+      <li>
+        <span class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h11M4 18h6"/></svg></span>
+        <span class="step-no">Step 3</span>
+        <h3>Prioritize</h3>
+        <p>Rank candidate molecules and delivery options, with the reasoning visible.</p>
+      </li>
+      <li>
+        <span class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/></svg></span>
+        <span class="step-no">Step 4</span>
+        <h3>Validate</h3>
+        <p>Your scientists test the top candidates in the lab and confirm what holds up.</p>
+      </li>
+      <li>
+        <span class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-3-6.2M20 4v5h-5"/></svg></span>
+        <span class="step-no">Step 5</span>
+        <h3>Learn</h3>
+        <p>Lab results return to the models so the next cycle starts better informed.</p>
+      </li>
+    </ol>
+    <div class="loop">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3l4 4-4 4M21 7H8a5 5 0 0 0-5 5M7 21l-4-4 4-4M3 17h13a5 5 0 0 0 5-5"/></svg>
+      <p><strong>Feedback loop.</strong> Results from step 4 flow back into step 2, so each cycle builds on the last.</p>
+    </div>
+  </div>
+</section>
+
+<section id="why-recepta" class="section on-dark" aria-labelledby="why-title">
+  <div class="wrap why-grid">
+    <div class="why-copy">
+      <h2 id="why-title">Why Recepta</h2>
+      <p class="lede">Modern drug research needs data science, chemistry and pharmaceutical know-how at the same time. Recepta is built where those three meet.</p>
+      <ul class="pillars">
+        <li><h3>Artificial intelligence</h3><p>Machine learning models that find patterns across chemical and biological data and turn them into ranked options.</p></li>
+        <li><h3>Pharmaceutical innovation</h3><p>A focus on real therapeutic questions, from choosing molecules to getting them to the right place in the body.</p></li>
+        <li><h3>Computational science</h3><p>Simulation and modeling grounded in chemistry and physics, so predictions can be examined and challenged.</p></li>
+      </ul>
+    </div>
+    <svg class="venn" viewBox="0 0 420 380" role="img" aria-label="Three overlapping circles labeled AI, Pharmaceutical innovation and Computational science, with Recepta at the center where they meet.">
+      <circle class="v-circle" cx="165" cy="150" r="92"/>
+      <circle class="v-circle" cx="255" cy="150" r="92"/>
+      <circle class="v-circle" cx="210" cy="226" r="92"/>
+      <path class="v-lead" d="M48 44 L97 82"/><circle class="v-end" cx="97" cy="82" r="3"/>
+      <path class="v-lead" d="M372 58 L323 88"/><circle class="v-end" cx="323" cy="88" r="3"/>
+      <path class="v-lead" d="M210 346 L210 320"/><circle class="v-end" cx="210" cy="320" r="3"/>
+      <text class="v-label" x="24" y="36">AI</text>
+      <text class="v-label" x="396" y="36" text-anchor="end">PHARMACEUTICAL</text>
+      <text class="v-label" x="396" y="52" text-anchor="end">INNOVATION</text>
+      <text class="v-label" x="210" y="366" text-anchor="middle">COMPUTATIONAL SCIENCE</text>
+      <text class="v-core" x="210" y="181">Recepta</text>
+    </svg>
+  </div>
+</section>
+
+<section id="contact" class="section bg-base" aria-labelledby="contact-title">
+  <div class="wrap contact-grid">
+    <div class="contact-copy">
+      <p class="eyebrow">Contact</p>
+      <h2 id="contact-title">Book a Demo</h2>
+      <p class="lede">Tell us about your research focus. Our team will follow up to arrange a walkthrough.</p>
+      <dl class="details">
+        <div><dt>Email</dt><dd><span>contact@recepta.ai</span></dd></div>
+        <div><dt>Phone</dt><dd><span>9390622638</span></dd></div>
+        <div><dt>Office</dt><dd><span>Hyderabad, Telangana, India</span></dd></div>
+      </dl>
+    </div>
+
+    <div class="form-card">
+      <form id="demo-form" class="form" novalidate>
+        <div class="field">
+          <label for="f-name">Full name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name">
+          <p class="err" id="e-name" hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-org">Organization</label>
+          <input id="f-org" name="organization" type="text" autocomplete="organization" required aria-describedby="e-org">
+          <p class="err" id="e-org" hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-email">Work email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email">
+          <p class="err" id="e-email" hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-message">Message</label>
+          <textarea id="f-message" name="message" rows="5" placeholder="Tell us about your target, program or research question."></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Send demo request</button>
+        <p class="fine">Name, organization and email are required.</p>
+      </form>
+
+      <div id="form-result" class="result" role="status" tabindex="-1" hidden>
+        <h3 id="res-title"></h3>
+        <p id="res-body" class="fine"></p>
+        <pre id="res-text" class="req-text"></pre>
+        <div class="cta-row">
+          <button type="button" class="btn btn-primary btn-sm" id="res-copy">Copy request</button>
+          <button type="button" class="btn btn-quiet btn-sm" id="res-edit">Edit request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer on-dark">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <span class="brand" aria-hidden="true">
+          <svg class="mark" viewBox="0 0 32 32" width="30" height="30"><polygon class="m-hex" points="16,2.5 28,9.25 28,22.75 16,29.5 4,22.75 4,9.25"/><circle class="m-core" cx="16" cy="16" r="4"/><path class="m-bond" d="M16 12V2.5M19.5 18l8.5 4.75"/></svg>
+          Recepta
+        </span>
+        <p>AI-native pharmaceutical venture focused on precision drug delivery, AI-driven drug discovery and computational chemistry tools.</p>
+      </div>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="#solutions">Solutions</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#why-recepta">Why Recepta</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Recepta. All rights reserved.</span>
+      <span>Graphics are conceptual illustrations, not study results.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Set this to your form service URL (for example a Formspree or CRM endpoint) when ready.
+  // While empty, the form validates and shows the request on screen without sending it.
+  var FORM_ENDPOINT = "";
+
+  var header = document.getElementById('site-nav').closest('.site-header');
+  var menuBtn = document.getElementById('menu-btn');
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setMenu(open) {
+    header.classList.toggle('nav-open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.querySelector('.lbl').textContent = open ? 'Close' : 'Menu';
+  }
+  menuBtn.addEventListener('click', function () {
+    setMenu(menuBtn.getAttribute('aria-expanded') !== 'true');
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
+      setMenu(false);
+      menuBtn.focus();
+    }
+  });
+
+  var msg = document.getElementById('f-message');
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href').slice(1);
+      var target = id ? document.getElementById(id) : null;
+      if (!target) return;
+      e.preventDefault();
+      setMenu(false);
+      if (a.dataset.topic && msg && !msg.value.trim()) {
+        msg.value = 'I am interested in: ' + a.dataset.topic + '.';
+      }
+      target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      setTimeout(function () {
+        if (id === 'contact') {
+          var f = document.getElementById('f-name');
+          if (f && !document.getElementById('demo-form').hidden) f.focus({ preventScroll: true });
+        } else {
+          target.setAttribute('tabindex', '-1');
+          target.focus({ preventScroll: true });
+        }
+      }, reduce ? 0 : 650);
+    });
+  });
+
+  var form = document.getElementById('demo-form');
+  var result = document.getElementById('form-result');
+  var resTitle = document.getElementById('res-title');
+  var resBody = document.getElementById('res-body');
+  var resText = document.getElementById('res-text');
+  var resCopy = document.getElementById('res-copy');
+  var resEdit = document.getElementById('res-edit');
+
+  var checks = [
+    { input: 'f-name', error: 'e-name', text: 'Enter your name.' },
+    { input: 'f-org', error: 'e-org', text: 'Enter your organization.' },
+    { input: 'f-email', error: 'e-email', text: 'Enter a valid email address, for example name@company.com.' }
+  ];
+  function isBad(el) {
+    var v = el.value.trim();
+    if (!v) return true;
+    return el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+  function showError(c, bad) {
+    var el = document.getElementById(c.input);
+    var er = document.getElementById(c.error);
+    er.hidden = !bad;
+    er.textContent = bad ? c.text : '';
+    el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+  }
+  checks.forEach(function (c) {
+    document.getElementById(c.input).addEventListener('input', function () {
+      if (this.getAttribute('aria-invalid') === 'true' && !isBad(this)) showError(c, false);
+    });
+  });
+
+  function showResult(title, body, text) {
+    form.hidden = true;
+    result.hidden = false;
+    resTitle.textContent = title;
+    resBody.textContent = body;
+    resText.hidden = !text;
+    resText.textContent = text || '';
+    resCopy.hidden = !text;
+    resEdit.textContent = text ? 'Edit request' : 'Send another request';
+    result.focus();
+  }
+  function backToForm() {
+    result.hidden = true;
+    form.hidden = false;
+    document.getElementById('f-name').focus();
+  }
+  resEdit.addEventListener('click', backToForm);
+
+  resCopy.addEventListener('click', function () {
+    var done = function (label) {
+      resCopy.textContent = label;
+      setTimeout(function () { resCopy.textContent = 'Copy request'; }, 2200);
+    };
+    var fallback = function () {
+      var r = document.createRange();
+      r.selectNodeContents(resText);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+      done('Selected, press copy');
+    };
+    try {
+      navigator.clipboard.writeText(resText.textContent).then(function () { done('Copied'); }, fallback);
+    } catch (err) { fallback(); }
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var first = null;
+    checks.forEach(function (c) {
+      var el = document.getElementById(c.input);
+      var bad = isBad(el);
+      showError(c, bad);
+      if (bad && !first) first = el;
+    });
+    if (first) { first.focus(); return; }
+
+    var data = {
+      name: document.getElementById('f-name').value.trim(),
+      organization: document.getElementById('f-org').value.trim(),
+      email: document.getElementById('f-email').value.trim(),
+      message: msg.value.trim()
+    };
+
+    if (FORM_ENDPOINT) {
+      fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function (r) {
+        if (!r.ok) throw new Error('Request failed');
+        form.reset();
+        showResult('Thank you, ' + data.name.split(' ')[0] + '.', 'Your demo request has been sent. We will be in touch at ' + data.email + '.', '');
+      }).catch(function () {
+        showResult('We could not send your request.', 'Please try again in a moment, or copy the details below and email them to us.',
+          buildText(data));
+      });
+      return;
+    }
+
+    showResult('Your request has not been sent yet.',
+      'This form is not connected to an inbox. Copy the request below and email it to the address on this page, or connect the form before launch.',
+      buildText(data));
+  });
+
+  function buildText(d) {
+    return 'Demo request\nName: ' + d.name + '\nOrganization: ' + d.organization + '\nEmail: ' + d.email +
+      '\nMessage: ' + (d.message || '(none)');
+  }
+})();
+</script>
+
+</body></html>
